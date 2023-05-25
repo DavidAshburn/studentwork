@@ -1,0 +1,55 @@
+@use 'colors';
+
+%formbase {
+	padding: .5rem;
+	padding-left: 2rem;
+	margin: .5rem;
+	border-radius: 1rem .2rem 1rem .2rem;
+	box-sizing: border-box;
+}
+
+.form-field {
+
+	input {
+		@extend %formbase;
+		width: 40vw;
+		min-width: 20rem;
+		height: 3rem;
+		font-size: 14pt;
+	}
+}
+
+.rail-field {
+	@extend %formbase;
+	width: 50vw;
+	min-width: 20rem;
+	height: 3rem;
+	font-size: 14pt;
+}
+
+textarea {
+	@extend %formbase;
+	width: 40vw;
+	min-width: 20rem;
+	height: 12rem;
+	font-size: 14pt;
+	font-family: "Raleway";
+	border-width: .2rem;
+	border-color: colors.$dark;
+}
+
+.dollars-in {
+	@extend %formbase;
+	width: 60%;
+	min-width: 15rem;
+	height: 3rem;
+	font-size: 14pt;
+
+}
+
+.check-in {
+	@extend %formbase;
+	width: 60%;
+	min-width: 15rem;
+	height: 2rem;
+}

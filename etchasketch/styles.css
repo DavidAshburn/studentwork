@@ -1,0 +1,69 @@
+
+body {
+	background: #422000;
+	background-image: url("panels/desk.jpg");
+	background-repeat: no-repeat;
+	background-size: 100vw;
+}
+
+.sketchimg {
+	position: absolute;
+	height: 800px;
+	top: 65px;
+	left: 35px;
+}
+
+.sketch-toy {
+	display: flex;
+	position: absolute;
+	top: 0px;
+	padding-top: 205px;
+	padding-left: 170px;
+}
+
+.grid-container {
+	display: flex;
+	width: 700px;
+	height: 490px;
+}
+
+.grid-column {
+	display:  flex;
+	flex-direction: column;
+	flex: 1;
+	background: lightgrey;
+}
+
+.grid-cell {
+	display: flex;
+	flex: 1;
+	transition: background 0.15s;
+}
+
+.activeCell {
+	background: #333333;
+}	
+
+.reset {
+	position: absolute;
+	z-index: 2;
+	top: 775px;
+	left: 65px;
+	border-radius: 15px;
+}
+
+.clear {
+	position: absolute;
+	z-index: 2;
+	top: 775px;
+	left: 912px;
+	border-radius: 15px;
+}
+
+.rainbow {
+	position: absolute;
+	z-index: 2;
+	top: 775px;
+	left: 200px;
+	border-radius: 15px;
+}

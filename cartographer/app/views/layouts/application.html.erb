@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NetMap</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <link href="https://fonts.googleapis.com/css2?&family=Monoton&family=Raleway:wght@300;400;600;700&family=Righteous&display=swap" rel="stylesheet">
+    <%= yield(:head_tags) %>
+  </head>
+  
+  <% if notice %>
+    <div class="flex flex-row absolute left-10 bottom-10">
+      <%= render 'layouts/notice' %>
+    </div>
+  <% end %>
+  
+  <% if alert %>
+    <div class="flex flex-row absolute left-10 bottom-10">
+      <%= render 'layouts/alert' %>
+    </div>
+  <% end %>
+
+  <body class="bg-fixed bg-oversize bg-gradient-to-bl from-cyan-200 via-blue-400 to-indigo-600">
+    <main class="flex flex-col justify-center items-center w-[100vw]">
+      <% if user_signed_in? %>
+        <div class="ml-5 mt-2 w-11/12">
+          <%= render 'layouts/nav' %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

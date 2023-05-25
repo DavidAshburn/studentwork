@@ -1,0 +1,27 @@
+<div class="flex flex-col items-center"> 
+  <div class="flex flex-row mt-10 w-full justify-center items-end">
+    <h2 class="font-bold sm:text-8xl text-6xl font-righteous">Sign Up</h2>
+  </div>
+ 
+   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+     <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="mt-2">
+        <%= f.email_field :email, autofocus: true, placeholder: "e-mail", class:"rounded-lg font-righteous text-lg mt-10" %>
+      </div>
+      <div class="mt-2">
+        <%= f.password_field :password, placeholder: "new-password", class:"rounded-lg font-righteous text-lg" %>
+      </div>
+      <div class="mt-2">
+        <%= f.password_field :password_confirmation, placeholder: "repeat-password", class:"rounded-lg font-righteous text-lg mt-3" %><br />
+        <% if @minimum_password_length %>
+          <em class="font-righteous md:ml-8 ml-5 text-zinc-700 text-xl">( <%= @minimum_password_length %> characters minimum )</em>
+        <% end %>
+      </div>
+      <div class="actions btn-green mt-4">
+        <%= f.submit "Sign up" %>
+      </div>
+    <% end %>
+  <div class="flex w-4/5 absolute bottom-10 justify-center">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

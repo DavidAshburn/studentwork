@@ -1,0 +1,17 @@
+16x6 grid of square divs
+
+create the divs with javascript
+use flex or Grid, it doesn't matter
+
+Set up a hover effect so the color changes leaving a trail through the grid
+
+Add a button at top that creates a popup
+ 
+	"number of squares per side for the new grid?" //100 maximum
+
+Generate a new grid in the same space as before, 
+
+//summary
+dynamically generate a grid of divs in a fixed space, 1 viewport on a side
+user may enter a number from 1-100 to set the number of grid squares per side
+default to 16 per side

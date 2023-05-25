@@ -1,0 +1,51 @@
+@use 'colors';
+
+.scoreboard {
+    position: fixed;
+    background: lightgrey;
+    border-radius: 15px;
+    box-shadow: 0 0 1rem #ccffcc;
+    color: white;
+    top: 80px;
+    right: 10px;
+    z-index: 2;
+    width: 12rem;
+    height: 10rem;
+    font-size: 3rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.correct {
+    color: palegreen;
+}
+
+.incorrect {
+    color: red;
+}
+
+.results {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    font-size: 2rem;
+    font-weight: bold;
+}
+p {
+	width: 60rem;
+	margin-left: 10rem;
+}
+
+.ins-question {
+    font-size: 13pt;
+    color: colors.$dark;
+}
+
+.text-success {
+    color: colors.$slime;
+    font-size: 15pt;
+}
+
+.text-danger {
+    color: colors.$danger;
+}

@@ -1,0 +1,42 @@
+@use 'colors';
+
+.btn-group {
+	display: flex;
+	gap: 0;
+	padding-top: 1rem;
+
+	.group-button {
+		background-color: colors.$secondary;
+		color: colors.$dark;
+		text-decoration: none;
+		margin: 0;
+		padding: 1rem 2rem;
+	}
+}
+
+.btn-group .group-button:first-child {
+	border-radius: 3.2rem 0 0 .8rem;
+}
+
+.btn-group .group-button:not(:last-child) {
+	border-right: none;
+}
+
+.btn-group .group-button:not(:first-child) {
+	border-left: 1px solid colors.$border;
+}
+
+.btn-group .group-button:last-child {
+	border-radius: 0 .8rem 3.2rem 0;
+}
+
+.group-button:hover {
+  background-color: colors.$primary;
+  color: colors.$info;
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}

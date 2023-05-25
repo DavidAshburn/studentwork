@@ -1,0 +1,282 @@
+Covered here
+	-pre-rendering
+		-static generation
+			-with data
+			-without data
+		-server-side rendering
+
+	-getStaticProps
+
+
+Pre-Rendering
+---------------
+
+default behavior
+server renders HTMl, browser runs the js and hydration occurs
+
+even if js is disabled, the app UI will still be there
+
+Static Generation generates the HTML at build time
+server-side Rendering generates the HTML on each request
+
+(in dev mode, pages are pre-rendered on every request)
+
+
+Per-Page Basis
+--------------
+
+You can choose what behavior each page will have
+Vercel recommends SSG whenever possible for performance, it will be served by CDN
+	-marketing pages
+	-blog posts
+	-e-commerce product listings
+	-help and documentation
+
+	Counter-indications
+	--------------------
+	-dynamic data
+	-frequently changing data
+	-data may change on any request
+
+SSG with data
+-------------
+
+when you export  page component you can also export an async function called getStaticProps
+	getStaticProps runs at build time in production (dev mode: runs on each request instead)
+	you can fetch externl data here and send it as props to the page
+
+	you can tell Next.js the page has data dependencies to resolve before rendering at build time
+
+
+------------------------------
+export default function Home(props) { ... }
+
+export async function getStaticProps() {
+  // Get external data from the file system, API, DB, etc.
+  const data = ...
+
+  // The value of the `props` key will be
+  //  passed to the `Home` component
+  return {
+    props: ...
+  }
+}
+--------------------------------
+
+Simple Blog Architecture
+------------------------
+
+	store blog posts as markdown files in our app directory, so we need to read from the file system
+
+Creating markdown files (.md)
+-----------------------
+
+	top-level directory /posts
+
+	Each markdown file has a metadata section at the top containing title and date. 
+	This is called YAML Front Matter, which can be parsed using a library called gray-matter.
+
+		npm install gray-matter
+
+	Create the utility function to read the file system
+		-parse the markdown file and get YAML meta-data
+
+	top-level directory /lib then /lib/posts.js
+
+---------------------------------------------------------------------
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+
+const postsDirectory = path.join(process.cwd(), 'posts');
+
+export function getSortedPostsData() {
+  // Get file names under /posts
+  const fileNames = fs.readdirSync(postsDirectory);
+  const allPostsData = fileNames.map((fileName) => {
+    // Remove ".md" from file name to get id
+    const id = fileName.replace(/\.md$/, '');
+
+    // Read markdown file as string
+    const fullPath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
+
+    // Combine the data with the id
+    return {
+      id,
+      ...matterResult.data,
+    };
+  });
+  // Sort posts by date
+  return allPostsData.sort((a, b) => {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+}
+---------------------------------------------------------------------
+
+	fs - node.js module that lets you read from the file system
+	path - node.js module that lets you manipulate file paths
+	matter - YAML metadata library for markdown files
+	lib folder could be named anything but lib or utils is conventional
+
+	this returns a sorted array (by metainfo date) of objects {id, metadata} => {id: ..., title: ..., date: ...}
+		the id is just the filename without .md at the end
+
+		there's no db yet so we have to use the file system, this util class is just a getter
+		that's also why SSG is ok here, when any new files are pushed to vercel, we get another buildtime
+
+---------------------------------------------------------------------
+
+now that it's parsed, we can add the data to our index page with the next.js data-fetch method getStaticProps()
+
+
+//--------------------------------------------------------------------------------------------
+//-getStaticProps()
+//--------------------------------------------------------------------------------------------
+
+	this is for Static Generation
+	we have to write this function using the reserved name getStaticProps(), we put it in the page to define the generation behavior
+
+	need to add import and call it inside getStatiProps in pages/index.js
+
+---------------------------------------------------------
+import { getSortedPostsData } from '../lib/posts';
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+---------------------------------------------------------
+
+export default function Home ({ allPostsData }) { ... }
+
+//---------------------------------------------------------/*
+
+	we can pass the 'props:' value straight into the following export function declaration
+	there is some Next.js/Vercel magic going on here, their system must call getStaticProps() at build time
+	because we aren't calling it, and a returned object's member can be referenced directly in our definition of Home()
+
+//---------------------------------------------------------*/
+
+time to put data on screen
+--------------------------
+
+<section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+    <h2 className={utilStyles.headingLg}>Blog</h2>
+    <ul className={utilStyles.list}>
+      {allPostsData.map(({ id, date, title }) => (
+        <li className={utilStyles.listItem} key={id}>
+          {title}
+          <br />
+          {id}
+          <br />
+          {date}
+        </li>
+      ))}
+    </ul>
+</section>
+
+---------------------------
+	we're using map to output a series of jsx blocks within which we can directly reference the post data keys
+---------------------------
+
+//--------------------------------------------------------------------------------------------
+//-Using getStaticProps()
+//--------------------------------------------------------------------------------------------
+
+	you can fetch data from other sources as well, API endpoints or the db
+
+API example
+----------------------------------------------------
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from an external API endpoint
+  const res = await fetch('..');
+  return res.json();
+}
+----------------------------------------------------
+	Next.js polyfills fetch() on both the client and server, no import required
+
+DB query
+----------------------------------------------------------
+import someDatabaseSDK from 'someDatabaseSDK'
+
+const databaseClient = someDatabaseSDK.createClient(...)
+
+export async function getSortedPostsData() {
+  // Instead of the file system,
+  // fetch post data from a database
+  return databaseClient.query('SELECT posts...')
+}
+----------------------------------------------------------
+
+	getStaticProps only runs on the server-side, your code here won't be sent to the browser
+
+	you can't use query parameters or HTTP headers since those are client-side
+	React needs to have all the required data before the page is rendered
+
+	Server Side Rendering runs at runtime so you can do that there with getServerSideProps()
+
+//--------------------------------------------------------------------------------------------
+//-Using getServerSideProps()
+//--------------------------------------------------------------------------------------------
+
+	not necessary for blog example so won't implement it
+
+------------------------------------------------------
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      // props for your component
+    },
+  };
+}
+------------------------------------------------------
+
+	context contains request-specific parameters
+
+	it's slower than static gen, can't be cached by CDN without extra configuration
+
+//--------------------------------------------------------------------------------------------
+//-Client Side Rendering
+//--------------------------------------------------------------------------------------------
+
+	fetches data from the client with JS at hydration
+
+	recommended for private, user-specific pages where SEO doesn't matter
+	these tend to use dynamic data anyways, like a dashboard or even DGCaddy's scorecard
+
+-----------------------
+SWR
+----------------------
+	
+	Next.js React hook for data fetching
+	It handles caching, revalidation, focus tracking, refetching on interval, and more.
+
+---------------------------------------------------------
+import useSWR from 'swr';
+
+function Profile() {
+  const { data, error } = useSWR('/api/user', fetch);
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+  return <div>hello {data.name}!</div>;
+}
+---------------------------------------------------------
+	looks like it gets called over and over until (error) or (data==true)
+	we pass useSWR a path and fetch as a ~callback function
+
+	https://swr.vercel.app/
+---------------------------------------------------------

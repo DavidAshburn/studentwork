@@ -1,0 +1,239 @@
+Link is client-side navigation between pages
+
+the transition happend using JS which is faster than default navigation
+
+Next.js will prefetch code for 'Link'ed elements in the viewport, this helps makes transitions instant
+
+Static Files
+------------------
+
+/public will hold assets in appropriate folders like /public/images
+
+Adding Images
+--------
+
+traditional HTML
+	<img src="/images/profile.jpg" alt="Your Name" />
+
+	you have to handle responsiveness, optimization, and lazy loading manually
+	Next can do this for you with the Image Component
+	it will even convert to .webp apparently
+	even images hosted by an external source can be optimized
+	images are optimized at runtime, not buildtime
+
+Example Component
+this is a hardcoded reference to images/profile.jpg
+width and height are required params
+
+----------------------------------
+import Image from 'next/image';
+
+const YourComponent = () => (
+  <Image
+    src="/images/profile.jpg" // Route of the image file
+    height={144} // Desired size with correct aspect ratio REQUIRED
+    width={144} // Desired size with correct aspect ratio REQUIRED
+    alt="Your Name"
+  />
+);
+----------------------------------
+
+
+Head
+---------
+
+Head is a Next.js component
+
+import Head from 'next/head'
+<Head>
+	<title>First Post</title>
+</Head>
+
+
+Script Loading
+--------------------
+
+alternative to
+
+<Head>
+  <title>First Post</title>
+  <script src="https://connect.facebook.net/en_US/sdk.js" />
+</Head>
+
+==============>
+
+import Script from 'next/script';
+<Script
+	src="https://connect.facebook.net/en_US/sdk.js"
+	strategy="lazyOnload"
+	onLoad={() =>
+		console.log('script loaded correctly, window.FB populated')
+	}
+/>
+
+CSS Styling
+-----------------------
+
+global stylsheet and a CSS module Home.module.css come with the base project
+
+CSS Modules allow you to locally scope CSS at the component-level by automatically creating unique clas names.
+This allows you to use the same CSS class name in different files without worrying about class name collisions.
+
+In addition to these modules, you can style your Next.hs app with Sass, Tailwind or CSS-in-JS libraries
+
+------------------------
+
+
+Layout Component
+
+export default function Layout({ children }) {
+	return <div>{children}</div>
+}
+
+we make this the outermost component of first-post
+
+CSS
+------
+
+Now we can add styles to the Layout component using a CSS Module
+components/layout.module.css
+where we define a .container class
+
+the modules must end in .module.css
+
+we import it into layout.js and use styles.container as the className
+
+============>
+so we have a layout component, and an adjacent module.css file that defines the classes we want on it
+we import the module into the layout component and apply the className there
+
+when we use the Layout component anywhere in the project we get the module classes without doing anything
+============>
+
+import styles from './layout.module.css';
+
+export default function Layout({ children }) {
+	return <div className={styles.container}>{children}</div>
+}
+
+=============
+in the browser the actual class name will be randomized like layout_container__2t4v2 or something
+container is so general but it doesnt matter if we reuse it with different files in a different module
+=============
+
+Global CSS Styles
+------------------------
+
+some CSS needs to be loaded by every page
+you need a file called pages/_app.js and a global css file somewhere you import manually
+
+-------------------------------
+
+import '../styles/global.css';
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+
+-------------------------------
+
+Styling recap
+-------------
+global.css imported everywhere by the _app.js file
+module.css files imported by their sibling {module}.js file
+any module in the styles folder can be manually imported
+
+Styling extras
+--------------
+clsx is a simple library that can toggle class names easily 
+	npm install clsx
+	https://github.com/lukeed/clsx
+
+	alert.module.css
+	-----------------
+	.success {
+  	color: green;
+	}
+	
+	.error {
+  	color: red;
+	}
+	-----------------
+
+	alert.jsx
+	-----------------
+
+	import styles from './alert.module.css';
+	import { clsx } from 'clsx';
+
+	export default function Alert({ children, type }) {
+	  return (
+	    <div
+	      className={clsx({
+	        [styles.success]: type === 'success',
+	        [styles.error]: type === 'error',
+	      })}
+	    >
+	      {children}
+	    </div>
+	  );
+	}
+	-----------------------
+
+PostCSS
+------------------
+
+Next.js default is PostCSS, customize with top-level file postcss.config.js
+This is useful if your using libraries like Tailwind
+
+	tailwind install steps (or use --tailwind option on create-next-app
+	------------------------
+
+	npm install -D tailwindcss autoprefixer postcss
+
+	then create 
+	postcss.config.js
+	------------------
+	module.exports = {
+	  plugins: {
+	    tailwindcss: {},
+	    autoprefixer: {},
+	  },
+	};
+	---------------------
+
+	Vercel recommends configuring content sources same as we did in Wordpress
+
+	top-level
+	tailwind.config.js
+	------------------------
+
+	module.exports = {
+	  content: [
+	    './pages/**/*.{js,ts,jsx,tsx}',
+	    './components/**/*.{js,ts,jsx,tsx}',
+	    // For the best performance and to avoid false positives,
+	    // be as specific as possible with your content configuration.
+	  ],
+	};
+	------------------------
+
+	PostCSS documentation
+	https://nextjs.org/docs/advanced-features/customizing-postcss-config
+
+
+-------------------------------
+
+Using SASS
+-----------
+
+SASS support is built-in just be sure to install sass 
+	npm install -D sass
+
+Out of the box, Next.js allows you to import Sass using both the .scss and .sass extensions. 
+You can use component-level Sass via CSS Modules and the .module.scss or .module.sass extension.
+
+	next CSS docs
+	https://nextjs.org/docs/basic-features/built-in-css-support
+
+-----------------------------------------------------------------------------------------------------

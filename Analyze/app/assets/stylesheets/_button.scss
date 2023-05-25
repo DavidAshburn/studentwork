@@ -1,0 +1,70 @@
+@use 'colors';
+
+$font: "Raleway";
+
+%btn {
+	text-decoration: none;
+	margin: 1rem;
+	padding: 1rem 2rem;
+	border-radius: 3.2rem .8rem 3.2rem .8rem;
+	border: none;
+	font-size: inherit;
+}
+
+
+
+.btn-flat {
+	@extend %btn;
+	background-color: colors.$secondary;
+	color: colors.$dark;
+
+	&:hover {
+		background-color: colors.$primary;
+  		color: colors.$info;
+	}
+
+	&:active {
+		background-color: colors.$dark;
+		color: colors.$info;
+	}
+}
+
+.btn-info {
+	@extend %btn;
+	background-color: colors.$info;
+	color: colors.$dark;
+
+	&:hover {
+		background-color: colors.$secondary;
+  		color: colors.$info;
+	}
+
+	&:active {
+		background-color: colors.$primary;
+		color: colors.$info;
+	}
+}
+
+.btn-sm-info {
+	@extend %btn;
+	background-color: colors.$info;
+	color: colors.$dark;
+	margin: .5rem;
+	padding: .5rem 1rem;
+
+	&:hover {
+		background-color: colors.$secondary;
+  		color: colors.$info;
+	}
+
+	&:active {
+		background-color: colors.$primary;
+		color: colors.$info;
+	}
+}
+
+.btn-close {
+	background-color: colors.$primary;
+	border: 1px solid colors.$dark;
+	border-radius: 2px;
+}

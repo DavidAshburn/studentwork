@@ -1,0 +1,69 @@
+@use 'colors';
+
+%ins-base {
+	border-radius: .5rem 5rem .5rem 5rem;
+	margin: 1vw;
+	width: 98%;
+	color: colors.$dark;
+	border: 4px solid colors.$info;
+	padding: 1rem;
+}
+
+%ins-calc {
+	width: 40%;
+}
+
+#home {
+	@extend %ins-base;
+}
+
+#homecalc {
+	@extend %ins-calc;
+}
+
+#auto {
+	@extend %ins-base;
+}
+
+#autocalc {
+	@extend %ins-calc;
+}
+
+#umbrella {
+	@extend %ins-base;
+	
+}
+
+#umbrellacalc {
+	@extend %ins-calc;
+}
+
+#life {
+	@extend %ins-base;
+}
+
+#lifecalc {
+	@extend %ins-calc;
+}
+
+#myleads {
+	overflow-y: scroll;
+	height: 50vh;
+}
+
+.ins-border {
+	display: flex;
+	flex-direction: column;
+	border-radius: 1rem 6rem 1rem 6rem;
+	margin: .5rem;
+	width: 95%;
+	border: 6px solid #5eead4;
+	justify-content: center;
+	align-items: center;
+}
+
+.output {
+	margin: 1.5rem;
+	font-weight: bold;
+	font-size: 20pt;
+}

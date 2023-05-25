@@ -1,0 +1,53 @@
+@use 'colors';
+
+.title {
+	font-family: "Monoton";
+	font-size: 50pt;
+}
+
+.subtitle {
+	font-family: "Righteous";
+	font-size: 25pt;
+	color: colors.$dark;
+}
+
+.listtitle {
+	font-family: "Righteous";
+	font-size: 25pt;
+	padding-top: 1rem;
+	color: colors.$dark;
+}
+
+.muted {
+	font-family: "Raleway";
+	font-size: 18pt;
+	color: colors.$info;
+}
+
+.hero-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	gap: 1rem;
+	margin-bottom: 2rem;
+
+	h1 {
+		font-family: "Monoton";
+		font-size: 60pt;
+	}
+}
+
+
+@media (max-width: 600px) {
+	.hero-text {
+		h1 {
+			font-size: 40pt;
+		}
+	}
+
+	.title {
+		font-size: 30pt;
+	}
+}

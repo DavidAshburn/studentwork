@@ -1,0 +1,2 @@
+class Plugroute < ApplicationRecord
+end

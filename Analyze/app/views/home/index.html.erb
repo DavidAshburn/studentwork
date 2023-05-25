@@ -1,0 +1,98 @@
+<div class="stack-center col-12 col-s-12" data-controller="calc">
+	<h1 class="title">Coverage Calc</h1>
+	<div class="ins-border">
+		<div class="row-center col-12 col-s-12" id="home">
+			<div class="stack-left col-12 col-s-12">
+				<div class="subtitle">Home</div>
+				<div class="row-center col-12 col-s-12">
+					<div class="stack-right col-6 col-s-12" id="homeinput">
+						<ul>
+							<li><span>Home Value:</span><input type="number" class="dollars-in" data-calc-target="value" value="750000"></li>
+							<li><span>Square Footage:</span><input type="number" class="dollars-in" data-calc-target="footage" value="1500"></li>
+							<br>
+
+							<li><span>Dwelling Coverage:</span><input type="number" class="dollars-in" data-calc-target="dwelling" value="600000"></li>
+							<li><span>Extended Replacement:</span><input type="number" class="dollars-in" data-calc-target="erc" value="1.2"></li>
+							<li><span>Liability Coverage:</span><input type="number" class="dollars-in" data-calc-target="homeliability" value="300000"></li>
+						</ul>
+					</div>
+					<div class="stack-center col-6 col-s-12" id="homecalc">
+						<div>Excess Home Value Risk:</div>
+						<div class="output" data-calc-target="excessre"></div>
+						<div>Coverage / Sq Ft:</div>
+						<div class="output" data-calc-target="coversqft"></div>
+						<button class="btn-sm-info" data-action="calc#update">Update</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="row-center col-12 col-s-12" id="auto">
+			<div class="stack-left col-12 col-s-12">
+				<div class="subtitle">Auto</div>
+				<div class="row-center col-12 col-s-12">
+					<div class="stack-right col-6 col-s-12" id="autoinput">
+						<ul>
+							<li><span>Liability Coverage:</span><input type="number" class="dollars-in" data-calc-target="autoliability" value="100000"></li>
+						</ul>
+					</div>
+					<div class="stack-center col-6 col-s-12" id="autocalc">
+						<div>Excess Home Value Risk</div>
+						<div data-calc-target="autoexcessre" class="output"></div>
+						<button class="btn-sm-info" data-action="calc#update">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-center col-12 col-s-12" id="umbrella">
+			<div class="stack-left col-12 col-s-12">
+				<div class="subtitle">Umbrella</div>
+				<div class="row-center col-12 col-s-12">
+					<div class="stack-right col-6 col-s-12" id="umbrellainput">
+						<ul>
+							<li><span>Umbrella Limit:</span><input type="number" class="dollars-in" data-calc-target="umbrellalimit" value="1000000"></li>
+							<li><span># of Owned Properties:</span><input type="number" class="dollars-in" data-calc-target="numproperties" value="2"></li>
+							<li><span>Total Property Value:</span><input type="number" class="dollars-in" data-calc-target="totalpropvalue" value="2300000"></li>
+							<li><span>Value of Other Investments:</span><input type="number" class="dollars-in" data-calc-target="investmentvalue" value="500000"></li>
+						</ul>
+					</div>
+					<div class="stack-center col-6 col-s-12" id="umbrellacalc">
+						<div>Excess Real Estate Risk in Auto Claims</div>
+						<div data-calc-target="excessumbrellaauto" class="output"></div>
+						<div>Excess Real Estate Risk in Personal Claims</div>
+						<div data-calc-target="excessumbrellahome" class="output"></div>
+						<div>Including Investments</div>
+						<div data-calc-target="totalexcessumbrella" class="output"></div>
+						<button class="btn-sm-info" data-action="calc#update">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-center col-12 col-s-12" id="life">
+			<div class="stack-left col-12 col-s-12">
+				<div class="subtitle">Life</div>
+				<div class="row-center col-12 col-s-12">
+					<div class="stack-right col-6 col-s-12" id="lifeinput">
+						<ul>
+							<li><span>Work Policy:</span><input type="checkbox" class="check-in" data-calc-target="worklife"></li>
+							<li><span>Death Benefit:</span><input type="number" class="dollars-in" data-calc-target="deathbenefit" value="300000"></li>
+							<li><span>Cash Value:</span><input type="number" class="dollars-in" data-calc-target="cashvalue" value="0"></li>
+							<li><span>Annual Income:</span><input type="number" class="dollars-in" data-calc-target="currentannual" value="120000"></li>
+							<li><span>Number of Dependents:</span><input type="number" class="dollars-in" data-calc-target="dependents" value="2"></li>
+						</ul>
+					</div>
+					<div class="stack-center col-6 col-s-12" id="lifecalc">
+						<div>Years of Current Income:</div>
+						<div data-calc-target="yearsincome" class="output"></div>
+						<div>Benefit to Each:</div>
+						<div data-calc-target="benefiteach" class="output"></div>
+						<button class="btn-sm-info" data-action="calc#update">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-center col-12 col-s-12">
+		<%= link_to "Log In", new_user_session_path, type: "button", class:"btn-info" %>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div data-controller="assembler" class="text-slate-100 font-righteous">
+  <div class="flex w-full justify-center py-4">
+    <h1 class="font-bold text-6xl">Assembler</h1>
+  </div>
+  <div class="flex gap-4 mb-4">
+    <canvas id="canvas" data-assembler-target="canvas"
+      class="bg-white">
+    </canvas>  
+  </div>
+  <div class="flex w-full justify-center gap-2">
+    <button class="btn-blue" data-action="assembler#spawnCircle">Circle</button>
+    <button class="btn-blue" data-action="assembler#spawnSquare">Square</button>
+    <button class="btn-blue" data-action="assembler#spawnTriangle">Triangle</button>
+    <button class="btn-blue" data-action="assembler#erase">Clear</button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+@use 'colors';
+
+.alert {
+	display: flex;
+	border: 1px solid darken(colors.$primary, 25%);
+	background-color: colors.$primary;
+	border-radius: 3.2rem .8rem 3.2rem .8rem;
+
+
+	width: 80vw;
+	font-family: "Raleway";
+	color: colors.$info;
+	padding: 1rem;
+	justify-content: space-between;
+	align-items: center;
+
+	position: fixed;
+	bottom: 1rem;
+}
+
+.error {
+	color: colors.$danger;
+}

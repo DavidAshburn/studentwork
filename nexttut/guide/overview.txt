@@ -1,0 +1,42 @@
+//----------------------------------------------
+// Overview
+//----------------------------------------------
+
+[appfolder]
+  [components]
+  | //react components and module.css files
+  |
+  [lib]
+  | //utility functions in js
+  |
+  [pages]
+  |		|-[api]
+  |		|	'{route}.js' 	//response handler for route request
+  |		|
+  |		|-[{routename}]
+  |   	|	'[id].js'     	//dynamic routing template file
+  |		|
+  |		'_app.js'			//imports global.css
+  |		'index.jsx'			//landing page
+  |
+  [public]
+  |		|-[images]
+  |		|   'picture.jpg'
+  |		|
+  |		|-[(other assets)]
+  | 	'asset1.ico'
+  |		'asset2.svg'
+  |
+  [styles]
+  |  	'global.css'
+  |  	(module.css files)
+  |
+  [{routename}]
+  |  	(files for dynamic routing content)
+  |  	'xxx.md'
+  |  	'yyy.md'
+  |
+  '.gitignore'
+  'package-lock.json'
+  'package.json'
+  'readme.md'

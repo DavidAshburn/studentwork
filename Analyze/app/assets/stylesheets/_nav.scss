@@ -1,0 +1,130 @@
+@use 'colors';
+
+nav {
+
+	top: 10px;
+	left: 0;
+	height: 3rem;
+
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
+	padding-right: 2rem;
+
+	background-color: #2dd4bf;
+	color: colors.$dark;
+
+	border-radius: 2rem 0 0 2rem;
+
+	.img-link {
+		border-radius: 50%;
+		height: 3rem;
+		align-self: center;
+	}
+
+	ul {
+
+		li {
+
+		}
+
+	}
+}
+
+%nav {
+	font-size: 14pt;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+
+%nav-row {
+	display: flex;
+	align-items: center;
+}
+
+.nav-link {
+	@extend %nav;
+	color: colors.$dark;
+	padding: .6rem 1.2rem;
+		
+	&:hover {
+  		color: colors.$info;
+  	}
+}
+
+.nav-link-info {
+	@extend %nav;
+	color: colors.$info;
+
+	&:hover {
+		color:colors.$dark;
+	}
+}
+
+.nav-left {
+	@extend %nav-row;
+	justify-content: start;
+}
+
+.nav-right {
+	@extend %nav-row;
+	justify-content: end;
+}
+
+.nav-dropdown {
+	float: left;
+	overflow: hidden;
+
+	.nav-drop-btn {
+		@extend %nav;
+		color: colors.$dark;
+		border: none;
+		background-color: inherit;
+		font-family: inherit;
+		margin: 0;
+		cursor: pointer;
+
+		&:hover {
+  			color: colors.$info;
+  		}
+	}
+
+	.nav-drop-content {
+  		position: absolute;
+  		background-color: colors.$secondary;
+  		color: colors.$dark;
+  		min-width: 160px;
+  		box-shadow: 3px 8px 8px 0px rgba(0,0,0,0.2);
+  		z-index: 1;
+  		background: linear-gradient(180deg, colors.$primary 0%, colors.$secondary 100%);
+
+
+  		.nav-link {
+  			float: none;
+  			padding: .6rem 1.2rem;
+  			text-decoration: none;
+  			display: block;
+  			text-align: left;
+  			cursor: pointer;
+  		}
+
+  		.nav-drop-btn {
+  			padding: .6rem 1.2rem;
+  			cursor: pointer;
+
+  			&:hover {
+  				color: colors.$info;
+  			}
+  		}
+	}
+}
+
+.nav-remember {
+	display: flex;
+	align-items: center;
+	padding-left: 3rem;
+	padding-top: 1rem;
+}

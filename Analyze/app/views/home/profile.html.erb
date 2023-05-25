@@ -1,0 +1,11 @@
+<div class="stack-left col-12 col-s-12">
+	<h1 class="subtitle">Profile</h1>
+	<h1 class="subtitle">My Leads</h1>
+	<div class="stack-left col-8 col-s-12" id="myleads">
+		<% @leads.each do |lead| %>
+			<% if lead.user_id == current_user.id %>
+				<%= render lead %>
+			<% end %>
+		<% end %>
+	</div>
+</div>

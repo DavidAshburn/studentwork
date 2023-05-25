@@ -1,0 +1,26 @@
+@use 'colors';
+
+%cardbase {
+	color: colors.$dark;
+	border-color: colors.$dark;
+	justify-content: center;
+	width: inherit;
+}
+.card {
+	
+}
+.card-title {
+	font-family: "Righteous";
+	font-size: 20pt;
+	border-radius: 10px 10px 0 0;
+
+}
+
+.card-body {
+	font-size: 15pt;
+}
+
+.card-footer {
+	font-size: 15pt;
+	border-radius: 0 0 10px 10px;
+}

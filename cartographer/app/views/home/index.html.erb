@@ -1,0 +1,14 @@
+<div class="flex flex-col pt-8 px-6">
+  <div class="w-full text-right font-righteous text-[10rem] leading-[4.6rem] text-zinc-100 tracking-tight leading-[8rem] mr-4">NetMap</div>
+  <div class="flex w-full justify-end">
+    <div class="w-2/3 text-right font-righteous text-2xl mt-8 text-zinc-200 pr-6">Where it all goes</div>
+  </div>
+</div>
+<div class="flex justify-start w-[full] absolute left-10 bottom-10">
+  <div class="flex flex-col gap-4">
+    <% if !user_signed_in? %>
+      <%= link_to "Register", new_user_registration_path, class:"btn-blue w-32" %>
+      <%= link_to "Sign In", new_user_session_path, class: "btn-green w-32" %>
+    <% end %>
+  </div>
+</div>

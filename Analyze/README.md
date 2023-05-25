@@ -1,0 +1,3 @@
+# README
+
+Standard Devise Config

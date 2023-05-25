@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-xxl" style="background-color: #10c272;">
+  <div class="container-fluid">
+
+    <a class="navbar-brand">
+      <%= image_tag('leaf.jpg', class: "navbar-brand p-0 me-0 me-lg-2", label:"Patches the Squirrel", height:"45", style:"border-radius: 50%;") %>
+    </a> 
+    
+    <button class="navbar-toggler justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+        
+        
+        <li class="nav-item, mt-1">
+          <%= link_to "Life Exams", root_path, class:"nav-link, h2 me-3" %>
+        </li>
+
+        <li class="nav-item, fs-4">
+          <%= link_to "Exam1", home_exam_path, class:"nav-link" %>
+        </li>
+
+        <li class="nav-item, fs-4">
+          <%= link_to "Exam2", home_exam2_path, class:"nav-link" %>
+        </li>
+
+        <li class="nav-item, fs-4">
+          <%= link_to "Exam3", home_exam3_path, class:"nav-link" %>
+        </li>
+
+        <li class="nav-item, fs-4">
+          <%= link_to "Exam4", home_exam4_path, class:"nav-link" %>
+        </li>
+
+        <li class="nav-item, fs-4">
+          <%= link_to "Exam5", home_exam5_path, class:"nav-link" %>
+        </li>      
+
+      </ul>
+    </div>
+
+  </div>
+</nav>

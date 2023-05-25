@@ -1,0 +1,25 @@
+<nav data-controller="navbar" class="sticky w-[95%] flex justify-between items-center gap-8 pr-8 bg-slate-100 inset-shadow rounded-full font-righteous text-bold text-sky-700 no-underline text-lg">
+  <div class="flex justify-start items-center">
+    <%= link_to image_tag('globe.png', class:"min-w-[3rem] w-12 h-12 rounded-full"), root_path %>
+  </div>
+  <div class="overflow-hidden flex min-w-fit">
+    <div class="overflow-hidden px-2.5 py-2 flex sm:hidden">
+      <button class="flex text-xl my-2 ml-2 hover:text-cyan-600" data-action="navbar#showDropAlt navbar#hideDrop">Link</button>
+        <div class="bg-slate-100 z-20 shadow-small min-w-[180px] hidden absolute rounded-b-xl right-5 py-2" data-navbar-target="altdrop">
+          <%# link_to "My Profile", home_profile_path, class:"flex ml-2 my-2 hover:text-cyan-600" %>
+          <%= link_to "Illustrator", canvas_illustrator_path, class:"flex text-zinc-700 hover:text-zinc-500 ml-2 my-2" %>
+          <%= link_to "Animator", canvas_animator_path, class:"flex text-zinc-700 hover:text-zinc-500 ml-2 my-2" %>
+          <%= link_to "Assembler", canvas_assembler_path, class:"flex text-zinc-700 hover:text-zinc-500 ml-2 my-2" %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"flex text-zinc-700 hover:text-zinc-500 ml-2 my-2" %><br />
+          <button class="flex font-monoton text-4xl text-zinc-700 hover:text-zinc-500 absolute right-3 bottom-2" data-action="navbar#hideDropAlt">x</button>
+        </div>
+    </div>
+    <div class="flex justify-end items-center">
+      <%# link_to "Profile", home_profile_path, class:"px-2.5 py-2 hover:text-cyan-600 hidden sm:flex"%>
+      <%= link_to "Illustrator", canvas_illustrator_path, class:"hidden sm:flex text-xl text-zinc-700 hover:text-zinc-500 px-2.5 py-2" %>
+      <%= link_to "Animator", canvas_animator_path, class:"hidden sm:flex text-xl text-zinc-700 hover:text-zinc-500 px-2.5 py-2" %>
+      <%= link_to "Assembler", canvas_assembler_path, class:"hidden sm:flex text-xl text-zinc-700 hover:text-zinc-500 px-2.5 py-2" %>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class:"hidden sm:flex text-xl text-zinc-700 hover:text-zinc-500 px-2.5 py-2 " %>
+    </div>
+  </div>
+</nav>

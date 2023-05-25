@@ -1,0 +1,2 @@
+class Plugboard < ApplicationRecord
+end
